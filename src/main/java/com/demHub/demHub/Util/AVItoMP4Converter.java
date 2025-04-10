@@ -9,74 +9,10 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-//public class AVItoMP4Converter {
-//    private static final String FFMPEG_PATH = "C:/ffmpeg/bin/ffmpeg.exe";
-//    private static final String ROOT_FOLDER = "D:/ANIME SERIES/Cartoon Collection/Jinkalala/folder";
-//
-//    public static void main(String[] args) {
-//        File folder = new File(ROOT_FOLDER);
-//        if (folder.exists() && folder.isDirectory()) {
-//            processFolder(folder);
-//        } else {
-//            System.out.println("Invalid folder path: " + ROOT_FOLDER);
-//        }
-//    }
-//
-//    private static void processFolder(File folder) {
-//        File[] files = folder.listFiles();
-//        if (files == null) return;
-//
-//        for (File file : files) {
-//            if (file.isDirectory()) {
-//                processFolder(file); // Recursively process subfolders
-//            } else if (file.getName().toLowerCase().endsWith(".avi")) {
-//                convertToMp4(file);
-//            }
-//        }
-//    }
-//
-//    private static void convertToMp4(File aviFile) {
-//        String mp4FilePath = aviFile.getAbsolutePath().replace(".avi", ".mp4");
-//
-//        ProcessBuilder builder = new ProcessBuilder(
-//                FFMPEG_PATH, "-i", aviFile.getAbsolutePath(),
-//                "-c:v", "libx264", "-preset", "fast", "-crf", "23",
-//                "-c:a", "aac", "-b:a", "128k", mp4FilePath
-//        );
-//
-//        // Redirect both output and error streams
-//        builder.redirectErrorStream(true);
-//
-//        try {
-//            System.out.println("Converting: " + aviFile.getAbsolutePath());
-//            Process process = builder.start();
-//
-//            // Read FFmpeg output for debugging
-//            try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
-//                String line;
-//                while ((line = reader.readLine()) != null) {
-//                    System.out.println(line); // Print FFmpeg logs to debug issues
-//                }
-//            }
-//
-//            int exitCode = process.waitFor();
-//            if (exitCode == 0) {
-//                System.out.println("✅ Conversion successful: " + mp4FilePath);
-//                aviFile.delete();
-//                System.out.println("🗑 Deleted original file: " + aviFile.getAbsolutePath());
-//            } else {
-//                System.out.println("❌ Conversion failed for: " + aviFile.getAbsolutePath());
-//            }
-//        } catch (IOException | InterruptedException e) {
-//            System.err.println("⚠ Error processing file: " + aviFile.getAbsolutePath());
-//            e.printStackTrace();
-//        }
-//    }
-//}
 
 public class AVItoMP4Converter {
     private static final String FFMPEG_PATH = "C:/ffmpeg/bin/ffmpeg.exe";
-    private static final String ROOT_FOLDER = "D:/ANIME SERIES/Cartoon Collection/Jinkalala/folder";
+    private static final String ROOT_FOLDER = "D:/ANIME SERIES/Cartoon Collection/Tom and Jerry Cartoons Complete Collection (1940-2007)";
     private static final int THREAD_POOL_SIZE = Runtime.getRuntime().availableProcessors(); // Use available CPU cores
 
     public static void main(String[] args) {

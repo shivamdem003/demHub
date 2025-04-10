@@ -15,7 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/videos")
 @CrossOrigin(origins = "*")
-public class videoController2 {
+public class videoController {
 
     private static final String VIDEO_DIR = "D:/ANIME SERIES/Cartoon Collection"; // Root folder
     //D:/ANIME SERIES/Cartoon Collection
@@ -45,7 +45,7 @@ public class videoController2 {
                 if (file.isDirectory()) {
                     // Recursively load subfolders and files
                     children.add(getDirectoryStructure(file));
-                } else if (file.getName().endsWith(".mp4") || file.getName().endsWith(".mkv") || file.getName().endsWith(".avi")){
+                } else if (file.getName().endsWith(".mp4") || file.getName().endsWith(".mkv")){
                     children.add(new FileNode(file.getName(), file.getAbsolutePath(), false, null));
                 }
             }
@@ -54,44 +54,6 @@ public class videoController2 {
         return new FileNode(folder.getName(), folder.getAbsolutePath(), true, children);
     }
 
-//    @GetMapping("/play")
-//    public ResponseEntity<FileSystemResource> streamVideo(
-//            @RequestParam String path,
-//            @RequestHeader(value = "Range", required = false) String rangeHeader) throws IOException {
-//
-//        File file = new File(path);
-//        if (!file.exists()) {
-//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-//        }
-//
-//        long fileSize = file.length();
-//        FileSystemResource resource = new FileSystemResource(file);
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.set(HttpHeaders.ACCEPT_RANGES, "bytes");
-//
-//        // Handle range requests (important for seeking in video)
-//        if (rangeHeader != null) {
-//            List<HttpRange> httpRanges = HttpRange.parseRanges(rangeHeader);
-//            HttpRange range = httpRanges.get(0);
-//            long rangeStart = range.getRangeStart(fileSize);
-//            long rangeEnd = Math.min(range.getRangeEnd(fileSize), fileSize - 1);
-//            long contentLength = rangeEnd - rangeStart + 1;
-//
-//            headers.set(HttpHeaders.CONTENT_RANGE, "bytes " + rangeStart + "-" + rangeEnd + "/" + fileSize);
-//            headers.setContentLength(contentLength);
-//            return ResponseEntity.status(HttpStatus.PARTIAL_CONTENT)
-//                    .headers(headers)
-//                    .contentType(MediaTypeFactory.getMediaType(file.getName()).orElse(MediaType.APPLICATION_OCTET_STREAM))
-//                    .body(resource);
-//        }
-//
-//        // Full file request
-//        headers.setContentLength(fileSize);
-//        return ResponseEntity.ok()
-//                .headers(headers)
-//                .contentType(MediaTypeFactory.getMediaType(file.getName()).orElse(MediaType.APPLICATION_OCTET_STREAM))
-//                .body(resource);
-//    }
 
     @GetMapping("/play")
     public ResponseEntity<InputStreamResource> streamVideo(
